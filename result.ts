@@ -1,8 +1,8 @@
 import './result-style.css'
-import { openPopup } from './pop-up'
-import type { ArtistData } from './data'
-import { fetchFirebaseArtists } from './services/firebaseService'
-import { fetchArtistAbouts } from './services/firbaseAboutService' 
+import { openPopup } from './src/pop-up'
+import type { ArtistData } from './src/data'
+import { fetchFirebaseArtists } from './src/services/firebaseService'
+import { fetchArtistAbouts } from './src/services/firbaseAboutService' 
 
 async function fetchArtistData(): Promise<ArtistData[]> {
   const res = await fetch('/data/artists.json')
