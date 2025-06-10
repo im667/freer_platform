@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('.tab') as NodeListOf<HTMLButtonElement>
   const tabContent = document.getElementById('tabContent') as HTMLDivElement
   const popupStyle = document.createElement('link');
-  let currentKeyword :string = "";
-  let currentGenre :string = "";
+
   popupStyle.rel = 'stylesheet';
   popupStyle.href = './src/pop-up.css';
   document.head.appendChild(popupStyle);
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (selectedTab === '작가명') {
         tabContent.innerHTML = `<input type="text" class="input" placeholder="작가명을 입력해주세요." />`
-        currentGenre = ''
       } else if (selectedTab === '카테고리') {
         tabContent.innerHTML = `
           <div class="category-buttons">
@@ -38,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="category-button">미디어</button>
           </div>
         `
-        currentKeyword = ''
       } else {
         tabContent.innerHTML = `<p style="color: #aaa;">(취향 탭은 아직 준비 중입니다)</p>`
       }
@@ -64,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
   document.addEventListener('click', (event) => {
+      let currentGenre :string = '';
     const target = event.target as HTMLElement
     if (target.classList.contains('category-button')) {
       document.querySelectorAll('.category-button').forEach((btn) => btn.classList.remove('active'))
