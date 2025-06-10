@@ -61,12 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
   document.addEventListener('click', (event) => {
-      let currentGenre :string = '';
     const target = event.target as HTMLElement
     if (target.classList.contains('category-button')) {
       document.querySelectorAll('.category-button').forEach((btn) => btn.classList.remove('active'))
       target.classList.add('active')
-      currentGenre = target.textContent?.trim() || ''
+  
       // 페이지 이동은 카테고리 기반 검색 페이지 구성 후 적용 예정
     }
   })
