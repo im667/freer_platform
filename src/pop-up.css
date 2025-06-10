@@ -1,0 +1,120 @@
+/* 팝업 스타일 */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-inner {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 720px;
+  max-height: 90%;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 16px;
+  right: 16px;
+  font-size: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.detail-grid div {
+  background: #f8f8f8;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.detail-grid div span {
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.detail-grid div strong {
+  font-weight: 700;
+  color: #111;
+}
+
+.detail-sections {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-sections section {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.detail-sections h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.gray-box {
+  background: #e5e5e5;
+  padding: 24px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #555;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.subscribe-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 24px;
+  background: #3b82f6;
+  text-decoration: none;
+  border-width: 0;
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}

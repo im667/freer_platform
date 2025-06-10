@@ -1,0 +1,18 @@
+[
+  {
+    "id": "-",
+    "name": "-",
+    "genre": "-",
+    "exhibitionCount": 0,
+    "instagram": "-",
+    "homepage": "-",
+    "metrics": {
+      "exhibitionCount": 0,
+      "auctionSuccessRate": 0,
+      "avgAuctionPrice": 0,
+      "pressMentions": 0,
+      "searchTrend": 0,
+      "activeRate": 0
+    }
+  }
+]
