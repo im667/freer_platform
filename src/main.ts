@@ -4,7 +4,8 @@ import { fetchFirebaseArtists } from './services/firebaseService';
 import { fetchArtistAbouts } from './services/firbaseAboutService';
 import type { ArtistData } from './data'
 import './style.css';
-
+let currentKeyword :string = ""
+let currentGenre :string = ""
 
 document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('.tab') as NodeListOf<HTMLButtonElement>
@@ -13,8 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   popupStyle.rel = 'stylesheet';
   popupStyle.href = './src/pop-up.css';
   document.head.appendChild(popupStyle);
-  let currentKeyword :string = ""
-  let currentGenre :string = ""
+ 
 
   tabs.forEach((tab) =>
     tab.addEventListener('click', () => {
