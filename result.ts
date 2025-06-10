@@ -70,7 +70,7 @@ const filteredList = allData.filter((a) => {
   <div class="top-area">
    <div class="logo-wrapper">
     <a href="/" class="logo-link">
-      <img src="./src/image/logo.png" alt="FREER 로고" class="logo" />
+      <img src="/image/logo.png" alt="FREER 로고" class="logo" />
     </a>
   </div>
     <div class="tabs">
