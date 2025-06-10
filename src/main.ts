@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupStyle = document.createElement('link');
 
   popupStyle.rel = 'stylesheet';
-  popupStyle.href = './src/pop-up.css';
+  popupStyle.href = '/pop-up.css';
   document.head.appendChild(popupStyle);
  
 
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (target.classList.contains('category-button')) {
       document.querySelectorAll('.category-button').forEach((btn) => btn.classList.remove('active'))
       target.classList.add('active')
-  
       // 페이지 이동은 카테고리 기반 검색 페이지 구성 후 적용 예정
     }
   })

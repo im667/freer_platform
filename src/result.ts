@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const allData: ArtistData[] = [...jsonData, ...firebaseData]
   const popupStyle = document.createElement('link');
   popupStyle.rel = 'stylesheet';
-  popupStyle.href = './src/pop-up.css';
+  popupStyle.href = '/pop-up.css';
   document.head.appendChild(popupStyle);
 
   const params = new URLSearchParams(window.location.search)
