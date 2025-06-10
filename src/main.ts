@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   popupStyle.rel = 'stylesheet';
   popupStyle.href = './src/pop-up.css';
   document.head.appendChild(popupStyle);
-  let currentKeyword :string
-  let currentGenre :string
+  let currentKeyword :string = ""
+  let currentGenre :string = ""
 
   tabs.forEach((tab) =>
     tab.addEventListener('click', () => {
