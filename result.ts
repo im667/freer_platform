@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 const searchGenres = genreAliasMap[currentGenre] || [currentGenre]
 
 const filteredList = allData.filter((a) => {
-  const matchName = currentKeyword === '' || a.name.includes(currentKeyword) || getMostFrequentOrganizer(a.metrics.exhibitions).includes(currentKeyword)
+  const matchName = currentKeyword === '' || a.name.includes(currentKeyword) || getMostFrequentOrganizer(a.metrics.exhibitions).includes(currentKeyword) || a.genre.includes(currentKeyword)
   const matchGenre =
     currentGenre === '' ||
     (Array.isArray(a.genre)
