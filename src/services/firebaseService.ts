@@ -29,6 +29,7 @@ export async function fetchFirebaseArtists(aboutData: About[]): Promise<ArtistDa
         genre: raw.mypage?.pageSettings?.category?.subCategories || '시각예술',
         metrics: {
           exhibitionCount: raw.about?.exhibition?.length || 0,
+          exhibitions: raw.about?.exhibition || '',
           auctionSuccessRate: 0,
           avgAuctionPrice: 0,
           pressMentions: 0,

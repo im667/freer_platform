@@ -2,7 +2,7 @@ import { fetchWorksData } from './services/workService';
 import { openPopup } from './pop-up';
 import { fetchFirebaseArtists } from './services/firebaseService';
 import { fetchArtistAbouts } from './services/firbaseAboutService';
-import type { ArtistData } from './data'
+import type { ArtistData, ArtistThumbnail } from './data'
 import './style.css';
 
 
@@ -70,13 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-// 🔷 타입 정의
-interface ArtistThumbnail {
-  imageUrl: string;
-  artistIndex: number;
-  artistPath: string;
-  artistData: ArtistData; // 🔥 popup에 넘기기 위해 추가
-}
+
 
 async function fetchArtistData(): Promise<ArtistData[]> {
   const res = await fetch('/data/artists.json')
@@ -170,6 +164,7 @@ function renderThumbnails(thumbnails: ArtistThumbnail[]) {
     const artist = thumbnailMap.get(id);
       if (artist) {
         openPopup(artist);
+        console.log(artist);
       }
     
   });

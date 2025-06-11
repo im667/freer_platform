@@ -6,7 +6,8 @@ export interface ArtistData {
   homepage: string
   genre: string
   metrics: {
-    exhibitionCount: number,              // 개인전 횟수
+      exhibitionCount: number,   
+      exhibitions:string,           // 개인전 횟수
       auctionSuccessRate: number,       // 낙찰률
       avgAuctionPrice: number,     // 평균 낙찰가
       pressMentions: number,                // 언론 보도 수
@@ -58,7 +59,7 @@ export interface About {
 export interface Exhibition {
   year: string;
   city: string;
-  organizers: string;
+  organizers?: string;
   name: string;
   type: 'solo' | 'group';
 }
@@ -79,4 +80,12 @@ export interface Project {
   year: string;
   organizers: string;
   spaces?: string; // 일부 항목에만 존재함
+}
+
+// 🔷 타입 정의
+export interface ArtistThumbnail {
+  imageUrl: string;
+  artistIndex: number;
+  artistPath: string;
+  artistData: ArtistData; // 🔥 popup에 넘기기 위해 추가
 }

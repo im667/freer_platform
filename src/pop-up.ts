@@ -1,10 +1,13 @@
+import type { Exhibition } from './data'
+
 
 export function openPopup(artist: any) {
   const popupContent = document.getElementById('popup-content') as HTMLDivElement
-  
-
+  const mostOrganizer = getMostFrequentOrganizer(artist?.metrics?.exhibitions ?? [])
+  console.log('전시',mostOrganizer)
   popupContent.innerHTML = `
     <h2>${artist.name}</h2>
+    <strong>주 활동지역 | </strong><span>${mostOrganizer}</span>
     <div class="detail-grid">
       <div><span>장르</span><strong>${artist.genre}</strong></div>
       <div><span>활동지수</span><strong>${artist.metrics.activeRate}</strong></div>
@@ -42,4 +45,36 @@ function renderInstagramLink(instagram?: string): string {
   const href = hasProtocol ? value : `https://${value}`;
 
   return `<a href="${href}" target="_blank" rel="noopener noreferrer">바로가기</a>`;
+}
+
+
+function getMostFrequentOrganizer(data?: Exhibition[]): string {
+  if (!Array.isArray(data) || data.length === 0) {
+    return '전시 정보가 없습니다.';
+  }
+
+  const countMap: Record<string, number> = {};
+
+  const filtered = data.filter(item => !!item.organizers);
+
+  if (filtered.length === 0) {
+    return '전시 정보가 없습니다.';
+  }
+
+  filtered.forEach(item => {
+    const key = item.organizers!;
+    countMap[key] = (countMap[key] || 0) + 1;
+  });
+
+  let mostFrequent = '';
+  let maxCount = 0;
+
+  for (const [key, count] of Object.entries(countMap)) {
+    if (count > maxCount) {
+      maxCount = count;
+      mostFrequent = key;
+    }
+  }
+
+  return mostFrequent;
 }
