@@ -7,7 +7,7 @@ export interface ArtistData {
   genre: string
   metrics: {
       exhibitionCount: number,   
-      exhibitions:string,           // 개인전 횟수
+      exhibitions:[],           // 개인전 횟수
       auctionSuccessRate: number,       // 낙찰률
       avgAuctionPrice: number,     // 평균 낙찰가
       pressMentions: number,                // 언론 보도 수

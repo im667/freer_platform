@@ -3,6 +3,7 @@ import { openPopup } from './src/pop-up'
 import type { ArtistData } from './src/data'
 import { fetchFirebaseArtists } from './src/services/firebaseService'
 import { fetchArtistAbouts } from './src/services/firbaseAboutService' 
+import { getMostFrequentOrganizer } from './src/utils/getMostFrequentOrganizer';
 
 async function fetchArtistData(): Promise<ArtistData[]> {
   const res = await fetch('/data/artists.json')
@@ -110,6 +111,7 @@ const filteredList = allData.filter((a) => {
         <tr>
           <th>이름</th>
           <th>장르</th>
+          <th>활동지역</th>
           <th>활동지수</th>
           <th>상세</th>
         </tr>
@@ -129,15 +131,17 @@ const filteredList = allData.filter((a) => {
   async function renderTableChunk() {
   const tbody = document.getElementById('artistTableBody') as HTMLTableSectionElement;
   const nextChunk = filteredList.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-
   for (const item of nextChunk) {
     const score = item.metrics.activeRate;
     const scoreClass = score >= 50 ? 'score-high' : 'score-low';
-
+    const city = item?.metrics?.exhibitions ?? []
+    const mostOrganizer = getMostFrequentOrganizer(city)
+    
     const row = `
       <tr>
         <td><span class="pill">${item.name}</span></td>
         <td><span class="pill">${item.genre}</span></td>
+        <td><span class="pill">${mostOrganizer}</span></td>
         <td><span class="pill ${scoreClass}">${score}</span></td>
         <td><button class="pill detail-button" data-id="${item.id}">자세히</button></td>
       </tr>

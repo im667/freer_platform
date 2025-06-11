@@ -1,5 +1,5 @@
-import type { Exhibition } from './data'
 
+import { getMostFrequentOrganizer } from './utils/getMostFrequentOrganizer';
 
 export function openPopup(artist: any) {
   const popupContent = document.getElementById('popup-content') as HTMLDivElement
@@ -47,34 +47,3 @@ function renderInstagramLink(instagram?: string): string {
   return `<a href="${href}" target="_blank" rel="noopener noreferrer">바로가기</a>`;
 }
 
-
-function getMostFrequentOrganizer(data?: Exhibition[]): string {
-  if (!Array.isArray(data) || data.length === 0) {
-    return '전시 정보가 없습니다.';
-  }
-
-  const countMap: Record<string, number> = {};
-
-  const filtered = data.filter(item => !!item.organizers);
-
-  if (filtered.length === 0) {
-    return '전시 정보가 없습니다.';
-  }
-
-  filtered.forEach(item => {
-    const key = item.organizers!;
-    countMap[key] = (countMap[key] || 0) + 1;
-  });
-
-  let mostFrequent = '';
-  let maxCount = 0;
-
-  for (const [key, count] of Object.entries(countMap)) {
-    if (count > maxCount) {
-      maxCount = count;
-      mostFrequent = key;
-    }
-  }
-
-  return mostFrequent;
-}
