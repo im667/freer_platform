@@ -2,6 +2,14 @@ import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig({
+   build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        result: 'result.html', // 추가!
+      },
+    },
+  },
   plugins: [
     createHtmlPlugin({
       inject: {
