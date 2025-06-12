@@ -53,8 +53,10 @@ export function openPopup(artist: any, artwork:WorkItem[]) {
     artworkContainer.innerHTML = artwork
       .slice(0, 3)
       .map(work => `
-        <div class="thumbnail-wrapper">
-          <img src="${work.url}" alt="${work.name}" class="popup-thumbnail" />
+        <div class="thumbnail-wrapper" target="_blank" rel="noopener noreferrer">
+          <a href=${artist.homepage}/works>
+           <img src="${work.url}" alt="${work.name}" class="popup-thumbnail" />
+           </a>
           <div class="caption">${work.name || 'untitled'}</div>
         </div>
       `)
