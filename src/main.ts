@@ -102,17 +102,19 @@ async function getArtistThumbnails(): Promise<ArtistThumbnail[]> {
         if (!matchedArtist) return null;
 
         const seriesArray = artist.works?.series ?? [];
-        const image = seriesArray
+        const imageCandidates = seriesArray
           .flatMap((series: any) => series.works ?? [])
-          .find((work: any) => !!work.url);
+          .filter((work: any) => !!work.url);
 
-        if (!image?.url) {
+        if (imageCandidates.length === 0) {
           console.warn(`이미지 없음: artistIndex=${index}, artistPath=${artist.path}, name=${artist.user_info?.name}`);
           return null;
         }
+        // 첫 후보 이미지를 기본으로 설정하고, 썸네일 렌더 시 실패 시 fallback 가능하도록
+        const bestImage = imageCandidates[0];
 
         return {
-          imageUrl: image.url,
+          imageUrl: bestImage.url,
           artistIndex: index,
           artistPath: artist.path ?? '',
           artistData: matchedArtist,
@@ -152,6 +154,15 @@ function renderThumbnails(thumbnails: ArtistThumbnail[]) {
     const img = document.createElement('img');
     img.src = thumb.imageUrl;
     img.alt = 'thumbnail';
+
+    img.onerror = () => {
+      const fallback = thumb.worksTab.find(w => w.url !== img.src); // 다른 후보 탐색
+      if (fallback) {
+        img.src = fallback.url;
+      } else {
+        img.src = '/image/recoverImage.png'; // 진짜 없을 때
+      }
+    };
 
     card.appendChild(img);
     container.appendChild(card);
