@@ -145,7 +145,7 @@ const filteredList = allData.filter((a) => {
   const nextChunk = filteredList.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
   for (const item of nextChunk) {
     const score = item.metrics.activeRate;
-    const scoreClass = score >= 50 ? 'score-high' : 'score-low';
+    const scoreClass = score >= 17 ? 'score-high' : 'score-low';
     const city = item?.metrics?.exhibitions ?? []
     const mostOrganizer = getMostFrequentOrganizer(city)
     
