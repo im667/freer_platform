@@ -162,12 +162,12 @@ font-size: 14px;
   display: block;
 }
 
-  .thumbnail-card span {
-    display: block;
-    padding: 8px;
-    font-size: 14px;
-    font-weight: bold;
-  }
+.thumbnail-card span {
+  display: block;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
 
   /* 🔽 반응형: 화면 좁을 때 2줄 → 1줄로 전환 */
 @media (max-width: 1024px) {

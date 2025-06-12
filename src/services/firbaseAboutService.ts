@@ -1,6 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
-import type { About } from '../data';
+import { db } from '../firebase.ts';
+import type { About } from '../data.ts';
 
 export async function fetchArtistAbouts(): Promise<About[]> {
     const snapshot = await getDocs(collection(db, 'domain'));   

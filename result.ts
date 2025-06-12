@@ -1,9 +1,11 @@
 import './result-style.css'
 import { openPopup } from './src/pop-up'
-import type { ArtistData } from './src/data'
+import type { ArtistData, WorkItem, Series } from './src/data'
 import { fetchFirebaseArtists } from './src/services/firebaseService'
 import { fetchArtistAbouts } from './src/services/firbaseAboutService' 
 import { getMostFrequentOrganizer } from './src/utils/getMostFrequentOrganizer';
+import { fetchWorksData } from './src/services/workService' 
+
 
 async function fetchArtistData(): Promise<ArtistData[]> {
   const res = await fetch('/data/artists.json')
@@ -12,10 +14,20 @@ async function fetchArtistData(): Promise<ArtistData[]> {
 }
 
 
+async function openPopupWithWorks(artist: ArtistData) {
+  const worksData = await fetchWorksData()
+  const artistWorks = worksData.find(w => w.path === artist.id)
+  const works: WorkItem[] = artistWorks?.works?.series
+    ?.flatMap((series: Series) => Array.isArray(series.works) ? series.works : [])
+    .filter((work: WorkItem): work is WorkItem => !!work.url) ?? []
+  openPopup(artist, works)
+}
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const [jsonData,firebaseAboutData] = await Promise.all([
     fetchArtistData(),
-    fetchArtistAbouts(),
+    fetchArtistAbouts()
   ])
  const firebaseData = await fetchFirebaseArtists(firebaseAboutData);
   const allData: ArtistData[] = [...jsonData, ...firebaseData]
@@ -37,10 +49,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const genreAliasMap: Record<string, string[]> = {
   '미술': ['서양화', '한국화', '미술', '시각예술','일러스트','만화','판화','조각', '입체', '오브제','설치','퍼포먼스','기획자'],
-  '디자인': ['시각','산업','패션','3D모델링','캐릭터','UX/UI','건축','인테리어','조경','가구','게임','차량'],
-  '공예': ['도자','목공예','석공예','섬유(직물,뜨개질,자수,터프팅)','칠공예','칠보','전톡 악기','금속','캔들','마크라메','플로리스트','테라리움','미니어처','유리','종이','가죽','보석','업사이클링','캘리그래피','퀼트','인형','레진','3D프린팅'],
-  '사진': ['인물','풍경','다큐멘터리','패션','스포츠','건축','제품','웨딩','광고','음식','천체','자연','야생동물','여행','보도'],
-  '미디어': ['영상','뮤직비디오','단편 영화','장편 영화','다큐멘터리','애니메이션','광고','제품','웨딩','모션 그래픽','VR/AR','드론'],
+  '디자인': ['시각','산업','패션','3D모델링','캐릭터','UX/UI','건축','인테리어','조경','가구','게임','차량','일러스트'],
+  '공예': ['도자','목공예','석공예','섬유(직물,뜨개질,자수,터프팅)','칠공예','칠보','전톡 악기','금속','캔들','마크라메','플로리스트','테라리움','미니어처','유리','종이','가죽','보석','업사이클링','캘리그래피','퀼트','인형','레진','3D프린팅','조각'],
+  '사진': ['인물','풍경','다큐멘터리','패션','스포츠','건축','제품','웨딩','광고','음식','천체','자연','야생동물','여행','기획자'],
+  '미디어': ['영상','뮤직비디오','단편 영화','장편 영화','다큐멘터리','애니메이션','광고','제품','웨딩','모션 그래픽','VR/AR','드론','퍼포먼스'],
 }
 
 const searchGenres = genreAliasMap[currentGenre] || [currentGenre]
@@ -63,7 +75,7 @@ const filteredList = allData.filter((a) => {
   const summaryMarkup = `
   <div class="result-summary-wrapper">
     <p class="result-summary">‘${keyword}’ 검색결과 <strong>${totalMatched}건</strong></p>
-    <a href="https://freer.it/about" target="_blank" class="register-button">작가 등록 신청하기</a>
+    <a href="https://freer.it/about" target="_blank" class="register-button">작가 등록 하기</a>
   </div>
 `
 
@@ -215,7 +227,7 @@ const filteredList = allData.filter((a) => {
         return
       }
 
-      const newQuery = tabType === 'category' ? '미술' : '홍길동'
+      const newQuery = tabType === 'category' ? '미술' : ''
       window.location.href = `/result.html?query=${encodeURIComponent(newQuery)}`
     })
   })
@@ -232,10 +244,10 @@ const filteredList = allData.filter((a) => {
     if (target.classList.contains('detail-button')) {
       const id = target.getAttribute('data-id') || ''
       const artist = allData.find((a) => a.id === id)
-    
-      if (artist) {
-        openPopup(artist)
-      }
+  if (artist) {
+    openPopupWithWorks(artist);
+
+  }
     }
   })
 })

@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase';
-import type { WorksData } from '../data';
+import { db } from '../firebase.ts';
+import type { WorksData } from '../data.ts';
 
 export async function fetchWorksDataByArtistId(artistId: string): Promise<WorksData | null> {
   try {

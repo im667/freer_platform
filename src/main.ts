@@ -1,8 +1,8 @@
-import { fetchWorksData } from './services/workService';
-import { openPopup } from './pop-up';
-import { fetchFirebaseArtists } from './services/firebaseService';
-import { fetchArtistAbouts } from './services/firbaseAboutService';
-import type { ArtistData, ArtistThumbnail } from './data'
+import { fetchWorksData } from './services/workService.ts';
+import { openPopup } from './pop-up.ts';
+import { fetchFirebaseArtists } from './services/firebaseService.ts';
+import { fetchArtistAbouts } from './services/firbaseAboutService.ts';
+import type { ArtistData, ArtistThumbnail } from './data.ts'
 import './style.css';
 
 
@@ -88,6 +88,7 @@ async function getArtistThumbnails(): Promise<ArtistThumbnail[]> {
 
   try {
     const worksData = await fetchWorksData();
+    console.log('📦 fetchWorksData 결과', worksData.slice(0, 3));
     const [jsonData, firebaseAboutData] = await Promise.all([
       fetchArtistData(),
       fetchArtistAbouts(),
@@ -114,7 +115,8 @@ async function getArtistThumbnails(): Promise<ArtistThumbnail[]> {
           imageUrl: image.url,
           artistIndex: index,
           artistPath: artist.path ?? '',
-          artistData: matchedArtist
+          artistData: matchedArtist,
+          worksTab: seriesArray.flatMap((s: any) => s.works ?? []).slice(0, 3)
         };
       })
       .filter((x): x is ArtistThumbnail => x !== null)
@@ -159,13 +161,16 @@ function renderThumbnails(thumbnails: ArtistThumbnail[]) {
   container.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     const card = target.closest('.thumbnail-card') as HTMLElement;
-    const thumbnailMap = new Map(thumbnails.map(t => [t.artistData.id, t.artistData]));
+    // const thumbnailMap = new Map(thumbnails.map(t => [t.artistData.id, t.artistData]));
     const id = card.getAttribute('data-artist-id') || '';
-    const artist = thumbnailMap.get(id);
-      if (artist) {
-        openPopup(artist);
-        console.log(artist);
-      }
+    const thumb = thumbnails.find(t => t.artistData.id === id);
+
+    if (thumb) {
+    openPopup(thumb.artistData, thumb.worksTab);
+    console.log(thumb.artistData, thumb.worksTab);
+  } else {
+    console.warn(`썸네일 데이터를 찾을 수 없음: id=${id}`);
+  }
     
   });
 }

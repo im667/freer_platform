@@ -88,4 +88,10 @@ export interface ArtistThumbnail {
   artistIndex: number;
   artistPath: string;
   artistData: ArtistData; // 🔥 popup에 넘기기 위해 추가
+  worksTab: WorkItem[];  // ✅ 추가
 }
+
+export type NewsItem = {
+  title: string;
+  link: string;
+};

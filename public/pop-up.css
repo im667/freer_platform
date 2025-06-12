@@ -118,3 +118,71 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
+
+.artworks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.popup-thumbnail {
+  width: 50%; /* 3개 열 */
+  aspect-ratio: 3 / 2; /* = 6:4 비율 */
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.popup-thumbnail:hover {
+  transform: scale(1.03);
+}
+
+.artist-news-info {
+  font-size: 10px;
+}
+
+.news-links {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.news-item a {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  background-color: #fafafa;
+  transition: all 0.2s ease-in-out;
+}
+
+.news-item a:hover {
+  background-color: #f0f0f0;
+  border-color: #aaa;
+}
+
+.news-title {
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .popup-thumbnail {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+  }
+}

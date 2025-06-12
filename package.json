@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.6.12",
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "firebase": "^11.8.1"
+    "firebase": "^11.8.1",
+    "node-fetch": "^2.7.0"
   }
 }

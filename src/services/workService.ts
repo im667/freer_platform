@@ -1,6 +1,6 @@
 // src/services/workService.ts
 import { collection, getDocs,query,where } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase.ts";
 
 export async function fetchWorksData(): Promise<any[]> {
 

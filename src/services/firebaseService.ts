@@ -1,9 +1,9 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
-import type { ArtistData, About } from '../data';
-import { calculateActivityScore } from '../score/activityScoreCalculator';
-import { fetchWorksDataByArtistId } from './fetchArtistWorksData';
-import { safeGetScore } from '../utils/safeGetScore';
+import { db } from '../firebase.ts';
+import type { ArtistData, About } from '../data.ts';
+import { calculateActivityScore } from '../score/activityScoreCalculator.ts';
+import { fetchWorksDataByArtistId } from './fetchArtistWorksData.ts';
+import { safeGetScore } from '../utils/safeGetScore.ts';
 
 export async function fetchFirebaseArtists(aboutData: About[]): Promise<ArtistData[]> {
   const snapshot = await getDocs(collection(db, 'domain'));

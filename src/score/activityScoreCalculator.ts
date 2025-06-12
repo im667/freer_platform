@@ -1,6 +1,6 @@
 // activityScoreCalculator.ts
 
-import type { ArtistData, About, Series, Exhibition, Project, Award } from '../data';
+import type { ArtistData, About, Series, Exhibition, Project, Award } from '../data.ts';
 
 export function calculateActivityScore(artist: ArtistData, about: About, series?: Series[]): number {
   let score = 0;
