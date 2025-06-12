@@ -10,16 +10,16 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
+   plugins: [
     createHtmlPlugin({
       inject: {
         tags: [
           {
-            injectTo: 'head', // head에 넣는다
+            injectTo: 'head',
             tag: 'script',
             attrs: {
-               src: '/meta-pixel.js'
-            },
+              src: '/meta-pixel.js' // 외부 스크립트 방식 추천
+            }
           },
           {
             injectTo: 'body',
